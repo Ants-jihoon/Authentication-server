@@ -22,27 +22,13 @@ const pages = {
 };
 
 const process = {
-  login : (req,res) =>{
-    const id = req.body.id;
-    const psword = req.body.psword;
-
-    if(user.id.includes(id)){
-      const idx = user.id.indexOf(id);
-      if(psword === user.psword[idx]){
-        return res.json({success: true});}
-        return res.json({
-          success : false,
-          msg : "비밀번호가 틀렸습니다."
-        })
-    }
-    return res.json({
-      success : false,
-      msg : "아이디가 존재하지 않습니다."
-    })
-  
+  login : async (req,res) =>{
+    const user = new User(req.body);
+    const response = await user.login()
+    return res.json(response);
   },
 
-  register : async(req,res)=>{
+  register : async (req,res)=>{
     const user = new User(req.body);
     const response = await user.register()
     return res.json(response);
