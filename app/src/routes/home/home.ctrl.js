@@ -1,42 +1,37 @@
-"use strict"
+"use strict";
 
 const User = require("../../models/User");
 
-const user = {
-  id : ["wlgns","aabb","abcd"],
-  psword : ["0413","0219","1234"]
-}; 
 
-const pages = {
-  home : (req,res)=>{
-    res.render("home/index")
-  },
+const output ={
+    home : (req, res) => {
+        res.render("home/index");
+    },
 
-  login : (req,res)=>{
-    res.render("home/login");
-  },
+    login : (req, res) => {
+        res.render("home/login");
+    },
 
-  register : (req,res)=>{
-    res.render("home/register");
-  }
-};
-
-const process = {
-  login : async (req,res) =>{
-    const user = new User(req.body);
-    const response = await user.login()
-    return res.json(response);
-  },
-
-  register : async (req,res)=>{
-    const user = new User(req.body);
-    const response = await user.register()
-    return res.json(response);
-  }
-
+    register : (req, res) => {
+        res.render("home/register");
+    },
 }
 
- module.exports = {
-   pages,
-   process
- }
+const process ={
+    login : async (req, res) => {
+        const user = new User(req.body);
+        const response = await user.login();
+        return res.json(response);
+    },
+
+    register : async (req,res) => {
+        const user = new User(req.body);
+        const response = await user.register();
+        return res.json(response);
+    },
+};
+
+module.exports = {
+    output,
+    process,
+};
