@@ -2,6 +2,8 @@
 
 const UserStorage = require("./UserStorage");
 const Encrption = require("./Encrypt");
+const jwt = require("jsonwebtoken");
+
 
 class User{
     constructor(body) {
@@ -11,11 +13,11 @@ class User{
     async login() {
         const client = this.body;
         try{
-            const user = await UserStorage.getUserInfo(client.id);
+            const user = await UserStorage.getUserInfo(client);
         if(user){
             const compare = await Encrption.compare(client.psword, user.psword);
             if(compare) {
-                return { success: true};
+                return {success: true};
             }
             return { success : false, msg:"비밀번호가 틀렸습니다."};
         }

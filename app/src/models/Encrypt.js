@@ -19,9 +19,6 @@ class Encrption{
             const isEqualPw = await bcrpty.compare(client, db);
             return resolve(isEqualPw);
         });
-        
-
-
     }    
 }
 
